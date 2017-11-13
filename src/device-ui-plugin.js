@@ -7,7 +7,7 @@ const SVGRenderer = require('@microdrop/device-controller/src/svg-renderer');
 
 const DeviceController = require('@microdrop/device-controller/src/device-controller');
 const MicrodropAsync = require('@microdrop/async');
-
+const UIPlugin = require('@microdrop/ui-plugin');
 
 class DeviceUIPlugin extends UIPlugin {
   constructor(elem, focusTracker) {

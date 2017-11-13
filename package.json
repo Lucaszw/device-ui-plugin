@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "build-dev": " npm run-script build-device-controller && npm run-script link-packages && webpack",
-    "link-packages": "npm ln ../device-controller ../microdrop-async",
+    "link-packages": "npm ln ../device-controller ../microdrop-async ../ui-plugin",
     "build-device-controller": "npm run-script --prefix ../device-controller build-dev"
   },
   "keywords": [
@@ -20,6 +20,7 @@
   "dependencies": {
     "@microdrop/async": "0.2.4",
     "@microdrop/device-controller": "^0.4.1",
+    "@microdrop/ui-plugin": "^0.1.2",
     "async-mqtt": "^1.0.1",
     "dat.gui": "^0.6.1",
     "jquery": "^3.2.1",
