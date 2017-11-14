@@ -11,24 +11,29 @@ const UIPlugin = require('@microdrop/ui-plugin');
 
 class DeviceUIPlugin extends UIPlugin {
   constructor(elem, focusTracker) {
-    super(elem, focusTracker, "DeviceUIPlugin");
+    super(elem, focusTracker);
     this.controls = null;
+    this.contextMenu = null;
     this.gui = null;
   }
 
   listen() {
     this.on("updateRequest", this.onUpdateRequest.bind(this));
-    this.render();
+
+    // XXX: Sometimes updateRequest doesn't fire on page reload
+    setTimeout(()=>this.trigger("updateRequest"), 1000);
+    // await this.render();
   }
 
   onUpdateRequest(msg) {
-    if (!this.controls) this.render();
+    if (!this.controls) { this.render(); }
     else {
       this.controls.cameraControls.trigger("updateRequest", this);
     }
   }
 
   contextMenuClicked(key, options) {
+    if (!this.controls) return;
     const microdrop = new MicrodropAsync();
     switch (key) {
       case "clearElectrodes":
@@ -50,16 +55,27 @@ class DeviceUIPlugin extends UIPlugin {
   }
 
   async render() {
-    const bbox = this.element.getBoundingClientRect();
-    if (bbox.width == 0) return;
+    const LABEL = "DeviceUIPlugin::render";
+    try {
+      // Don't render if not visible or already rendererd
+      const bbox = this.element.getBoundingClientRect();
+      if (bbox.width == 0) return;
+      if (this.element.children.length != 0) return;
 
-    this.controls = await DeviceController.createScene(this.element);
-    this.gui = CreateDatGUI(this.element, this.controls);
-    this.contextMenu = CreateContextMenu(this.element, this.contextMenuClicked.bind(this));
+      const controls = await DeviceController.createScene(this.element);
+      const gui = CreateDatGUI(this.element, controls);
+      const contextMenu = CreateContextMenu(this.element, this.contextMenuClicked.bind(this));
 
-    const dat = await SVGRenderer.ConstructObjectsFromSVG("default.svg");
-    const microdrop = new MicrodropAsync();
-    await microdrop.device.putThreeObject(dat);
+      const dat = await SVGRenderer.ConstructObjectsFromSVG("default.svg");
+      const microdrop = new MicrodropAsync();
+      await microdrop.device.putThreeObject(dat);
+
+      this.controls = controls;
+      this.gui = gui;
+      this.contextMenu = contextMenu;
+    } catch (e) {
+      console.error(LABEL, e.toString());
+    }
   }
 
   static CreateContextMenu(element, callback) {
