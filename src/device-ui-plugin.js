@@ -40,7 +40,7 @@ class DeviceUIPlugin extends UIPlugin {
         microdrop.electrodes.putActiveElectrodes([]);
         break;
       case "clearRoutes":
-        microdrop.routes.putRoutes({});
+        microdrop.routes.putRoutes([]);
         break;
       case "clearRoute":
         this.controls.routeControls.trigger("clear-route", {key, options});

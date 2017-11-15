@@ -21,8 +21,8 @@
   "author": "Sci-Bots",
   "license": "BSD-2-Clause",
   "dependencies": {
-    "@microdrop/async": "0.2.20",
-    "@microdrop/device-controller": "^0.4.10",
+    "@microdrop/async": "0.2.21",
+    "@microdrop/device-controller": "^0.4.11",
     "@microdrop/ui-plugin": "^0.1.5",
     "async-mqtt": "^1.0.1",
     "dat.gui": "^0.6.1",
