@@ -5,13 +5,15 @@
   "main": "device-ui-plugin.web.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "dev-mode": "npm run uninstall-pkgs && npm i ../microdrop-async ../device-controller ../ui-plugin",
+    "prod-mode": "npm run uninstall-pkgs && npm i @microdrop/async @microdrop/ui-plugin @microdrop/device-controller",
     "build": "webpack",
-    "build-dev": " npm run-script build-device-controller && npm run-script link-packages && webpack",
-    "link-packages": "npm ln ../device-controller ../microdrop-async ../ui-plugin",
-    "build-device-controller": "npm run-script --prefix ../device-controller build-dev",
+    "build-dev": " npm run build-device-controller && webpack",
+    "build-device-controller": "npm run --prefix ../device-controller build-dev",
     "update-deps": "ncu -ua @microdrop/async @microdrop/device-controller @microdrop/ui-plugin && npm install",
     "git-add": "git add package-lock.json && git add -p . && git commit",
-    "publish-pkg": "npm run build && npm version patch && npm publish && git push origin master"
+    "publish-pkg": "npm run prod-mode && npm run build && npm version patch && npm publish && git push origin master",
+    "uninstall-pkgs": "npm uninstall @microdrop/async @microdrop/device-controller @microdrop/ui-plugin"
   },
   "keywords": [
     "microdrop",
@@ -21,14 +23,16 @@
   "author": "Sci-Bots",
   "license": "BSD-2-Clause",
   "dependencies": {
-    "@microdrop/async": "0.2.21",
-    "@microdrop/device-controller": "^0.4.11",
-    "@microdrop/ui-plugin": "^0.1.5",
+    "@microdrop/async": "^0.2.23",
+    "@microdrop/device-controller": "^0.4.12",
+    "@microdrop/ui-plugin": "^0.1.7",
     "async-mqtt": "^1.0.1",
     "dat.gui": "^0.6.1",
     "jquery": "^3.2.1",
     "jquery-contextmenu": "^2.6.3",
-    "uuid": "^3.1.0"
+    "keyboard-shortcut": "^1.2.0",
+    "uuid": "^3.1.0",
+    "yo-yo": "^1.4.1"
   },
   "devDependencies": {
     "css-loader": "^0.28.7",
