@@ -8,7 +8,7 @@ const yo = require('yo-yo');
 const SVGRenderer = require('@microdrop/device-controller/src/svg-renderer');
 
 const DeviceController = require('@microdrop/device-controller/src/device-controller');
-const MicrodropAsync = require('@microdrop/async');
+const MicrodropAsync = require('@microdrop/async/MicrodropAsync');
 const UIPlugin = require('@microdrop/ui-plugin');
 
 const DIRECTIONS = {LEFT: "left", UP: "up", DOWN: "down", RIGHT: "right"};
