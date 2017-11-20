@@ -5,7 +5,7 @@ const Dat = require('dat.gui/build/dat.gui');
 const uuid = require('uuid/v4');
 const yo = require('yo-yo');
 
-const SVGRenderer = require('@microdrop/device-controller/src/svg-renderer');
+// const SVGRenderer = require('@microdrop/device-controller/src/svg-renderer');
 
 const DeviceController = require('@microdrop/device-controller/src/device-controller');
 const MicrodropAsync = require('@microdrop/async/MicrodropAsync');
@@ -85,7 +85,7 @@ class DeviceUIPlugin extends UIPlugin {
       const gui = CreateDatGUI(this.element, controls);
       const contextMenu = CreateContextMenu(this.element, this.contextMenuClicked.bind(this));
 
-      const dat = await SVGRenderer.ConstructObjectsFromSVG("default.svg");
+      const dat = await DeviceController.SVGRenderer.ConstructObjectsFromSVG("default.svg");
       const microdrop = new MicrodropAsync();
       await microdrop.device.putThreeObject(dat);
 

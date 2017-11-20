@@ -24,7 +24,7 @@
   "license": "BSD-2-Clause",
   "dependencies": {
     "@microdrop/async": "^0.2.24",
-    "@microdrop/device-controller": "^0.4.14",
+    "@microdrop/device-controller": "^0.4.15",
     "@microdrop/ui-plugin": "^0.1.8",
     "async-mqtt": "^1.0.1",
     "dat.gui": "^0.6.1",
