@@ -1,6 +1,6 @@
 {
   "name": "@microdrop/device-ui-plugin",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "description": "UI Plugin to view device, routes, and electrodes",
   "main": "device-ui-plugin.web.js",
   "scripts": {
