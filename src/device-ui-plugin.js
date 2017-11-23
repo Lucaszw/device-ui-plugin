@@ -78,14 +78,15 @@ class DeviceUIPlugin extends UIPlugin {
     try {
       // Don't render if not visible or already rendererd
       const bbox = this.element.getBoundingClientRect();
+      const children = _.filter(this.element.children, (c)=>c.tagName != "SCRIPT");
       if (bbox.width == 0) return;
-      if (this.element.children.length != 0) return;
+      if (children.length != 0) return;
 
       const controls = await DeviceController.createScene(this.element);
       const gui = CreateDatGUI(this.element, controls);
       const contextMenu = CreateContextMenu(this.element, this.contextMenuClicked.bind(this));
 
-      const dat = await DeviceController.SVGRenderer.ConstructObjectsFromSVG("default.svg");
+      const dat = await DeviceController.SVGRenderer.ConstructObjectsFromSVG("/default.svg");
       const microdrop = new MicrodropAsync();
       await microdrop.device.putThreeObject(dat);
 
